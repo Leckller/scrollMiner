@@ -5,5 +5,5 @@
 * {
     transition: all;
     transition: 300ms;
-    background-color: gold;
+    scroll-behavior: smooth;
 }

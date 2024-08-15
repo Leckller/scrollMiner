@@ -1,57 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Context from '../State/Context';
-import { Floors } from '../types/floors';
+import useMiner from '../hooks/useMiner';
+import useTimer from '../hooks/useTimer';
+import Floor from './Floor';
+import Loja from './Loja';
+import Anchor from './Anchor';
 
 function Main() {
-  const { height, setHeight } = useContext(Context);
-  const [floors, setFloors] = useState<Floors[]>(['terra', 'terra', 'areia']);
-
-  useEffect(() => {
-    const sentinel = document.querySelector('#sentinel')!;
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-
-      if (entry.isIntersecting) {
-        observer.unobserve(sentinel);
-        const newHeight = height + 100;
-        let floor: Floors = 'terra';
-
-        if (height < 3000) {
-          const randomNumber = Math.floor(Math.random() * 3);
-          const f:Floors[] = ['terra', 'agua', 'areia'];
-          floor = f[randomNumber];
-        } else {
-          const randomNumber = Math.floor(Math.random() * 2);
-          const f:Floors[] = ['pedra', 'ouro'];
-          floor = f[randomNumber];
-        }
-
-        setFloors((p) => [...p, floor]);
-        setHeight(newHeight);
-        document.body.style.overflow = 'hidden';
-      }
-    }, {
-      rootMargin: '100px',
-    });
-
-    setTimeout(() => {
-      document.body.style.overflow = 'auto';
-      observer.observe(sentinel);
-    }, 1000);
-  }, [height]);
-
+  const { height, floors } = useContext(Context);
+  useMiner();
+  useTimer();
   return (
-    <div
+    <main
       id="top"
-      className={ `"flex flex-col justify-evenly ${`h-[${height}]`}` }
+      className={ `"flex flex-col justify-evenly md:pt-[0px]
+         pt-[50px] ${`h-[${height}]`} relative` }
     >
-      <div className="h-[95vh]" />
-      <div className="h-[5vh]">grama</div>
+      <div className="h-[95vh] flex pt-[10vh] flex-col">
+        <article className="w-full flex justify-end pr-[20px]">
+          <Anchor id="#sentinel" text="Bottom" />
+        </article>
+        <Loja />
+      </div>
+      <Floor type="grama" />
       {floors.map((f, i) => (
-        <div className="h-[5vh]" key={ f + i }>{f}</div>
+        <Floor type={ f } key={ f + i } />
       ))}
-      <div className="bg-black" id="sentinel" />
-    </div>
+      <Anchor id="#top" text="Top" bottom />
+      <div className="bg-black h-[5vh]" id="sentinel" />
+    </main>
   );
 }
 
