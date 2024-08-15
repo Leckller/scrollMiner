@@ -4,14 +4,14 @@ import { AguaItems, ItemsType } from '../types/items';
 export class Sardinha implements ItemsType {
   public type:AguaItems = 'sardinha';
 
-  public id = Math.random();
+  public id = new Date().getTime();
 
   public value = 5;
 }
 export class Bacalhau implements ItemsType {
   public type:AguaItems = 'bacalhau';
 
-  public id = Math.random();
+  public id = new Date().getTime();
 
   public value = 10;
 }

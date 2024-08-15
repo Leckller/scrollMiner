@@ -6,7 +6,7 @@ function Provider({ children }: { children:ReactNode }) {
   const [height, setHeight] = useState(0);
   const [floors, setFloors] = useState<Floors[]>(['terra', 'terra', 'areia']);
   const [start, setStart] = useState(false);
-  const [limitTimer, setLimitTimer] = useState(3000);
+  const [limitTimer, setLimitTimer] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [money, setMoney] = useState(0);
 
