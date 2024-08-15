@@ -7,10 +7,12 @@ import Agua from './floors/Agua';
 import Areia from './floors/Areia';
 import Pedra from './floors/Pedra';
 import Ouro from './floors/Ouro';
+import useTimer from '../hooks/useTimer';
 
 function Main() {
   const { height, floors } = useContext(Context);
   useMiner();
+  const [a, timer] = useTimer();
   return (
     <main
       id="top"

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import Context from '../State/Context';
 import { Floors } from '../types/floors';
+import randomFloor from '../utils/randomFloor';
 
 function useMiner() {
   const { height, setHeight, setFloors } = useContext(Context);
@@ -15,15 +16,10 @@ function useMiner() {
         let floor: Floors = 'terra';
 
         if (height < 3000) {
-          const randomNumber = Math.floor(Math.random() * 3);
-          const f:Floors[] = ['terra', 'agua', 'areia'];
-          floor = f[randomNumber];
+          floor = randomFloor(['terra', 'agua', 'areia']);
         } else {
-          const randomNumber = Math.floor(Math.random() * 2);
-          const f:Floors[] = ['pedra', 'ouro'];
-          floor = f[randomNumber];
+          floor = randomFloor(['pedra', 'ouro']);
         }
-
         setFloors((p) => [...p, floor]);
         setHeight(newHeight);
       }
