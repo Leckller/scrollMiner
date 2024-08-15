@@ -4,7 +4,7 @@ import { Floors } from '../types/floors';
 
 function Main() {
   const { height, setHeight } = useContext(Context);
-  const [floors, setFloors] = useState<Floors[]>(['terra']);
+  const [floors, setFloors] = useState<Floors[]>(['terra', 'terra', 'areia']);
 
   useEffect(() => {
     const sentinel = document.querySelector('#sentinel')!;
@@ -45,10 +45,10 @@ function Main() {
       id="top"
       className={ `"flex flex-col justify-evenly ${`h-[${height}]`}` }
     >
-      <div className="h-[90vh]" />
-      <div className="h-[10vh]">terra</div>
+      <div className="h-[95vh]" />
+      <div className="h-[5vh]">grama</div>
       {floors.map((f, i) => (
-        <div className="h-[100px]" key={ f + i }>{f}</div>
+        <div className="h-[5vh]" key={ f + i }>{f}</div>
       ))}
       <div className="bg-black" id="sentinel" />
     </div>
