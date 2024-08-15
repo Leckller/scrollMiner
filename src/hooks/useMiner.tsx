@@ -26,14 +26,12 @@ function useMiner() {
 
         setFloors((p) => [...p, floor]);
         setHeight(newHeight);
-        document.body.style.overflow = 'hidden';
       }
     }, {
       rootMargin: '100px',
     });
 
     setTimeout(() => {
-      document.body.style.overflow = 'auto';
       observer.observe(sentinel);
     }, 1000);
   }, [height]);

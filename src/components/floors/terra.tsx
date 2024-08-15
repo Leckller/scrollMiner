@@ -1,7 +1,7 @@
-function terra() {
+function Terra() {
   return (
-    <div>terra</div>
+    <article className="h-[5vh] w-full bg-yellow-950">Terra</article>
   );
 }
 
-export default terra;
+export default Terra;
