@@ -4,32 +4,34 @@ import { Floors } from '../types/floors';
 import randomFloor from '../utils/randomFloor';
 
 function useMiner() {
-  const { height, setHeight, setFloors } = useContext(Context);
+  const { height, setHeight, setFloors, limitTimer, setStart } = useContext(Context);
   useEffect(() => {
     const sentinel = document.querySelector('#sentinel')!;
     const observer = new IntersectionObserver((entries) => {
       const [entry] = entries;
 
       if (entry.isIntersecting) {
+        setStart(true);
         observer.unobserve(sentinel);
-        const newHeight = height + 100;
-        let floor: Floors = 'terra';
+        setTimeout(() => {
+          const newHeight = height + 100;
+          let floor: Floors = 'terra';
 
-        if (height < 3000) {
-          floor = randomFloor(['terra', 'agua', 'areia']);
-        } else {
-          floor = randomFloor(['pedra', 'ouro']);
-        }
-        setFloors((p) => [...p, floor]);
-        setHeight(newHeight);
+          if (height < 3000) {
+            floor = randomFloor(['terra', 'agua', 'areia']);
+          } else {
+            floor = randomFloor(['pedra', 'ouro']);
+          }
+          setFloors((p) => [...p, floor]);
+          setHeight(newHeight);
+          setStart(false);
+        }, limitTimer);
       }
     }, {
-      rootMargin: '100px',
+      threshold: 0.8,
     });
 
-    setTimeout(() => {
-      observer.observe(sentinel);
-    }, 1000);
+    observer.observe(sentinel);
   }, [height]);
 }
 

@@ -1,1 +1,1 @@
-export type Floors = 'terra' | 'agua' | 'areia' | 'pedra' | 'ouro';
+export type Floors = 'terra' | 'agua' | 'areia' | 'pedra' | 'ouro' | 'grama';

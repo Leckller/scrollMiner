@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import Context from '../State/Context';
 
 function Header() {
-  const { height } = useContext(Context);
+  const { height, seconds } = useContext(Context);
   return (
     <header
       className="fixed"
     >
-      {height}
+      {`${height} - ${seconds}`}
     </header>
   );
 }

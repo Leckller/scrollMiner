@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import Context from '../State/Context';
 
-function useTimer(): [() => void, number] {
-  const [seconds, setSeconds] = useState(0);
-  const [start, setStart] = useState(true);
-  const toggleStart = () => {
-    setStart((prev) => !prev);
-  };
+function useTimer() {
+  const { limitTimer, start, seconds, setSeconds } = useContext(Context);
 
   useEffect(() => {
-    if (seconds >= 30) {
-      setSeconds(0);
-    }
     if (start) {
       const id = setInterval(() => {
         setSeconds(seconds + 1);
-        console.log(seconds);
-      }, 100);
+      }, limitTimer / 10);
 
       return () => clearInterval(id);
     }
+    setSeconds(0);
   }, [start, seconds]);
-
-  return [toggleStart, seconds];
 }
 
 export default useTimer;
