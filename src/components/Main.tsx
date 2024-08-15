@@ -4,6 +4,7 @@ import useMiner from '../hooks/useMiner';
 import useTimer from '../hooks/useTimer';
 import Floor from './Floor';
 import Loja from './Loja';
+import Anchor from './Anchor';
 
 function Main() {
   const { height, floors } = useContext(Context);
@@ -12,23 +13,20 @@ function Main() {
   return (
     <main
       id="top"
-      className={ `"flex flex-col justify-evenly ${`h-[${height}]`} relative` }
+      className={ `"flex flex-col justify-evenly md:pt-[0px]
+         pt-[50px] ${`h-[${height}]`} relative` }
     >
-      <div className="h-[95vh] flex pt-[10vh]">
+      <div className="h-[95vh] flex pt-[10vh] flex-col">
+        <article className="w-full flex justify-end pr-[20px]">
+          <Anchor id="#sentinel" text="Bottom" />
+        </article>
         <Loja />
       </div>
       <Floor type="grama" />
       {floors.map((f, i) => (
         <Floor type={ f } key={ f + i } />
       ))}
-      <a
-        href="#top"
-        className="absolute size-20 rounded-full flex justify-center items-center
-        border-2 border-black bottom-20 right-20
-        "
-      >
-        go to top
-      </a>
+      <Anchor id="#top" text="Top" bottom />
       <div className="bg-black h-[5vh]" id="sentinel" />
     </main>
   );

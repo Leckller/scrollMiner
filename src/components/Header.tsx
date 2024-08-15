@@ -5,7 +5,7 @@ function Header() {
   const { height, money } = useContext(Context);
   return (
     <header
-      className="fixed min-h-[50px] w-full
+      className="fixed  w-full
       flex flex-row justify-evenly p-[20px]
       bg-blue-500 z-10
       "
@@ -16,7 +16,7 @@ function Header() {
       <article className="w-[40%] flex items-center justify-center">
         <h1>Scroll Miner</h1>
       </article>
-      <article className="w-[30%] flex items-center justify-center">
+      <article className="w-[30%] flex items-center justify-around">
         <p>{`Dinheiro: ${money}`}</p>
       </article>
     </header>

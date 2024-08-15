@@ -1,5 +1,5 @@
 import { Floors } from '../types/floors';
-import { Agua, Areia, Grama, Ouro, Pedra, Terra } from './floors';
+import { Agua, Areia, Grama, Pedra, Terra } from './floors';
 
 function Floor({ type }: { type: Floors }) {
   switch (type) {
@@ -11,8 +11,6 @@ function Floor({ type }: { type: Floors }) {
       return <Areia />;
     case 'pedra':
       return <Pedra />;
-    case 'ouro':
-      return <Ouro />;
     case 'grama':
       return <Grama />;
     default:
