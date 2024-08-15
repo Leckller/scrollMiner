@@ -4,6 +4,7 @@ import Main from '../components/Main';
 function Home() {
   return (
     <>
+      <div id="top" className="absolute" />
       <Header />
       <Main />
     </>

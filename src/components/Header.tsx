@@ -2,11 +2,12 @@ import { useContext } from 'react';
 import Context from '../State/Context';
 
 function Header() {
-  const { height, limitTimer, money } = useContext(Context);
+  const { height, money } = useContext(Context);
   return (
     <header
-      className="fixed h-[5vh] min-h-[30px] w-full
+      className="fixed min-h-[50px] w-full
       flex flex-row justify-evenly p-[20px]
+      bg-blue-500 z-10
       "
     >
       <article className="w-[30%] flex items-center justify-center">

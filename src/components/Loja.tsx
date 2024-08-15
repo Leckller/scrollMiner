@@ -1,7 +1,12 @@
+import { useContext } from 'react';
+import Context from '../State/Context';
+
 function Loja() {
+  const { limitTimer } = useContext(Context);
   return (
     <section className="flex flex-row w-full justify-around items-center">
       <article className="flex flex-col gap-5">
+        <p>{`Velocidade de escavação: ${limitTimer / 1000} segundos`}</p>
         <p>
           Melhorar a velocidade de escavação
         </p>
