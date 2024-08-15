@@ -4,5 +4,6 @@
 
 * {
     transition: all;
-    transition: 150ms;
+    transition: 300ms;
+    background-color: gold;
 }

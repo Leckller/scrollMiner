@@ -1,34 +1,56 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Context from '../State/Context';
+import { Floors } from '../types/floors';
 
 function Main() {
   const { height, setHeight } = useContext(Context);
-  const go = false;
+  const [floors, setFloors] = useState<Floors[]>(['terra']);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entry) => {
-      if (entry.some((e) => e.isIntersecting) && go) {
-        setHeight(height + Math.floor(Math.random() * 50 + 1));
-        (entry[0].target as HTMLDivElement).style.marginTop = `${height}px`;
+    const sentinel = document.querySelector('#sentinel')!;
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+
+      if (entry.isIntersecting) {
+        observer.unobserve(sentinel);
+        const newHeight = height + 100;
+        let floor: Floors = 'terra';
+
+        if (height < 3000) {
+          const randomNumber = Math.floor(Math.random() * 3);
+          const f:Floors[] = ['terra', 'agua', 'areia'];
+          floor = f[randomNumber];
+        } else {
+          const randomNumber = Math.floor(Math.random() * 2);
+          const f:Floors[] = ['pedra', 'ouro'];
+          floor = f[randomNumber];
+        }
+
+        setFloors((p) => [...p, floor]);
+        setHeight(newHeight);
         document.body.style.overflow = 'hidden';
       }
+    }, {
+      rootMargin: '100px',
     });
-    const sentinel = document.querySelector('#sentinel') as HTMLElement;
-    observer.observe(sentinel);
-    return () => {
+
+    setTimeout(() => {
       document.body.style.overflow = 'auto';
-    };
+      observer.observe(sentinel);
+    }, 1000);
   }, [height]);
 
   return (
     <div
-      onScrollCapture={ () => console.log('tadam') }
       id="top"
-      className={ `"flex flex-col justify-evenly bg-blue-100 ${`h-[${height}]`}` }
-      onScroll={ () => console.log('penis') }
+      className={ `"flex flex-col justify-evenly ${`h-[${height}]`}` }
     >
-      <div className="h-[100vh]" />
-      <div className="h-[100px] bg-black" id="sentinel" />
+      <div className="h-[90vh]" />
+      <div className="h-[10vh]">terra</div>
+      {floors.map((f, i) => (
+        <div className="h-[100px]" key={ f + i }>{f}</div>
+      ))}
+      <div className="bg-black" id="sentinel" />
     </div>
   );
 }
