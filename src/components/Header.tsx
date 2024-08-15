@@ -2,12 +2,22 @@ import { useContext } from 'react';
 import Context from '../State/Context';
 
 function Header() {
-  const { height, seconds } = useContext(Context);
+  const { height, limitTimer, money } = useContext(Context);
   return (
     <header
-      className="fixed"
+      className="fixed h-[5vh] min-h-[30px] w-full
+      flex flex-row justify-evenly p-[20px]
+      "
     >
-      {`${height} - ${seconds}`}
+      <article className="w-[30%] flex items-center justify-center">
+        <p>{`Profundidade escavada: ${height}`}</p>
+      </article>
+      <article className="w-[40%] flex items-center justify-center">
+        <h1>Scroll Miner</h1>
+      </article>
+      <article className="w-[30%] flex items-center justify-center">
+        <p>{`Dinheiro: ${money}`}</p>
+      </article>
     </header>
   );
 }
